@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+}
+
+group 'org.obiz'
+version '1.0-SNAPSHOT'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+application {
+    mainClassName = project.hasProperty("mainClass") ? project.getProperty("mainClass") : 'org.obiz.sdtd.Parser'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation 'com.google.guava:guava:31.1-jre'
+//    implementation 'com.igormaznitsa:jbbp:2.0.4'
+//    implementation 'org.postgresql:postgresql:42.5.0'
+//    testImplementation 'com.h2database:h2:2.1.214'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
